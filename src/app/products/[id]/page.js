@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import AddToCartButton from "@/components/product/AddToCartButton";
 import { getProductById } from "@/lib/api/products";
 
 const usdFormatter = new Intl.NumberFormat("en-US", {
@@ -66,6 +67,18 @@ export default async function ProductDetailPage({ params }) {
           <strong className="product-detail-price">
             {usdFormatter.format(product.price)}
           </strong>
+
+          <div className="product-detail-actions">
+            <AddToCartButton
+              product={{
+                id: product.id,
+                title: product.title,
+                price: product.price,
+                thumbnail: product.thumbnail,
+                stock: product.stock,
+              }}
+            />
+          </div>
 
           <dl className="product-detail-facts">
             {product.brand && (

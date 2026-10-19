@@ -1,6 +1,8 @@
 import "./globals.css";
-import Header from "@/components/layout/Header";
+
 import Footer from "@/components/layout/Footer";
+import Header from "@/components/layout/Header";
+import StoreProvider from "@/store/StoreProvider";
 
 export const metadata = {
   title: "MiniMarket",
@@ -11,13 +13,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="id">
       <body>
-        <Header />
+        <StoreProvider>
+          <Header />
 
-        <main className="container page-content">
-          {children}
-        </main>
+          <main className="container page-content">
+            {children}
+          </main>
 
-        <Footer />
+          <Footer />
+        </StoreProvider>
       </body>
     </html>
   );
