@@ -289,3 +289,157 @@ textarea {
     grid-template-columns: 1fr;
   }
 }
+
+.product-image-link {
+  display: block;
+}
+
+.product-title-link:hover,
+.product-detail-link:hover,
+.back-link:hover {
+  color: var(--primary);
+}
+
+.product-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.product-detail-link {
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.product-detail-page {
+  padding-block: 8px 40px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.product-detail-layout {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+  gap: 48px;
+  padding: 40px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+}
+
+.product-detail-image-container {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #f4f4f5;
+  border-radius: 16px;
+}
+
+.product-detail-image {
+  object-fit: contain;
+}
+
+.product-detail-content {
+  align-self: center;
+}
+
+.product-detail-content h1 {
+  margin: 10px 0 16px;
+  font-size: clamp(32px, 5vw, 52px);
+  line-height: 1.1;
+}
+
+.product-detail-meta {
+  display: flex;
+  gap: 20px;
+  color: var(--muted);
+}
+
+.product-detail-description {
+  margin: 24px 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.product-detail-price {
+  display: block;
+  color: var(--primary);
+  font-size: 32px;
+}
+
+.product-detail-facts {
+  display: grid;
+  gap: 12px;
+  margin: 32px 0 0;
+}
+
+.product-detail-facts div {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.product-detail-facts dt {
+  color: var(--muted);
+}
+
+.product-detail-facts dd {
+  margin: 0;
+  text-align: right;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.not-found {
+  max-width: 640px;
+  margin: 80px auto;
+  padding: 48px;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+}
+
+.not-found .eyebrow {
+  color: var(--primary);
+}
+
+.not-found h1 {
+  margin: 12px 0;
+  font-size: 40px;
+}
+
+.not-found > p:not(.eyebrow) {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.primary-link {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 12px 20px;
+  color: #ffffff;
+  background: var(--primary);
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .product-detail-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 24px;
+  }
+}

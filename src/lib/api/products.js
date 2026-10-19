@@ -22,3 +22,30 @@ export async function getProducts(limit = 12) {
 
   return data.products;
 }
+
+export async function getProductById(id) {
+  const response = await fetch(
+    `${API_BASE_URL}/products/${id}`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  if (response.status === 404) {
+    return null;
+  }
+
+  if (!response.ok) {
+    throw new Error(
+      `Gagal mengambil detail produk: ${response.status}`
+    );
+  }
+
+  const product = await response.json();
+
+  if (!product || typeof product.id !== "number") {
+    throw new Error("Format detail produk tidak valid");
+  }
+
+  return product;
+}
