@@ -1,11 +1,15 @@
 import ProductCard from "./ProductCard";
 
-export default function ProductList({ products }) {
+export default function ProductList({
+  products,
+  emptyTitle = "Produk belum tersedia",
+  emptyMessage = "Silakan coba kembali beberapa saat lagi.",
+}) {
   if (products.length === 0) {
     return (
       <div className="empty-state">
-        <h3>Produk belum tersedia</h3>
-        <p>Silakan coba kembali beberapa saat lagi.</p>
+        <h3>{emptyTitle}</h3>
+        <p>{emptyMessage}</p>
       </div>
     );
   }

@@ -77,7 +77,19 @@ export default async function HomePage({
           category={category}
         />
 
-        <ProductList products={products} />
+        <ProductList
+          products={products}
+          emptyTitle={
+            hasFilters
+              ? "Produk tidak ditemukan"
+              : "Produk belum tersedia"
+          }
+          emptyMessage={
+            hasFilters
+              ? "Coba gunakan kata kunci atau kategori yang berbeda."
+              : "Silakan coba kembali beberapa saat lagi."
+          }
+        />
       </section>
     </section>
   );
