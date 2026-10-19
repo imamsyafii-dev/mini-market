@@ -18,12 +18,15 @@ import {
   selectCartTotalQuantity,
 } from "@/store/features/cart/cartSlice";
 
+import useClientReady from "@/hooks/useClientReady";
+
 const usdFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
 });
 
 export default function CartPage() {
+  const isClientReady = useClientReady();
   const dispatch = useDispatch();
   const isHydrated = useSelector(selectCartHydrated);
   const items = useSelector(selectCartItems);
@@ -32,7 +35,7 @@ export default function CartPage() {
     selectCartTotalQuantity
   );
 
-  if (!isHydrated) {
+  if (!isClientReady || !isHydrated) {
     return (
       <section
         className="cart-loading"

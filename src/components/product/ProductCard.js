@@ -1,14 +1,28 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import WishlistButton from "./WishlistButton";
+
 const usdFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
 });
 
 export default function ProductCard({ product }) {
-  const categoryName = product.category.replaceAll("-", " ");
+  const categoryName = product.category.replaceAll(
+    "-",
+    " "
+  );
+
   const productUrl = `/products/${product.id}`;
+
+  const wishlistProduct = {
+    id: product.id,
+    title: product.title,
+    price: product.price,
+    thumbnail: product.thumbnail,
+    stock: product.stock,
+  };
 
   return (
     <article className="product-card">
@@ -49,6 +63,12 @@ export default function ProductCard({ product }) {
         <p className="product-description">
           {product.description}
         </p>
+
+        <div className="product-card-wishlist">
+          <WishlistButton
+            product={wishlistProduct}
+          />
+        </div>
 
         <div className="product-information">
           <span className="product-rating">

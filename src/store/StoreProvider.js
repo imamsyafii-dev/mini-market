@@ -11,20 +11,36 @@ import {
   saveCart,
 } from "./features/cart/cartStorage";
 import { hydrateCart } from "./features/cart/cartSlice";
+import {
+  loadWishlist,
+  saveWishlist,
+} from "./features/wishlist/wishlistStorage";
+import {
+  hydrateWishlist,
+} from "./features/wishlist/wishlistSlice";
 import { makeStore } from "./store";
 
 export default function StoreProvider({ children }) {
   const [store] = useState(() => makeStore());
 
   useEffect(() => {
-    const persistedItems = loadCart();
+    const persistedCartItems = loadCart();
+    const persistedWishlistItems = loadWishlist();
+
+    store.dispatch(
+      hydrateCart(persistedCartItems)
+    );
+
+    store.dispatch(
+      hydrateWishlist(persistedWishlistItems)
+    );
 
     const unsubscribe = store.subscribe(() => {
-      const items = store.getState().cart.items;
-      saveCart(items);
-    });
+      const state = store.getState();
 
-    store.dispatch(hydrateCart(persistedItems));
+      saveCart(state.cart.items);
+      saveWishlist(state.wishlist.items);
+    });
 
     return unsubscribe;
   }, [store]);

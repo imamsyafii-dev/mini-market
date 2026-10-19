@@ -20,6 +20,7 @@ import {
   selectCartSubtotal,
   selectCartTotalQuantity,
 } from "@/store/features/cart/cartSlice";
+import useClientReady from "@/hooks/useClientReady";
 
 const usdFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -67,6 +68,7 @@ function validateCheckout(values) {
 }
 
 export default function CheckoutPage() {
+  const isClientReady = useClientReady();
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -167,7 +169,7 @@ export default function CheckoutPage() {
     router.push("/checkout-success");
   }
 
-  if (!isHydrated) {
+  if (!isClientReady || !isHydrated) {
     return (
       <section
         className="checkout-status"

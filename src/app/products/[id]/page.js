@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import AddToCartButton from "@/components/product/AddToCartButton";
+import WishlistButton from "@/components/product/WishlistButton";
 import { getProductById } from "@/lib/api/products";
 
 const usdFormatter = new Intl.NumberFormat("en-US", {
@@ -26,6 +27,13 @@ export default async function ProductDetailPage({ params }) {
 
   const categoryName = product.category.replaceAll("-", " ");
   const imageUrl = product.images?.[0] ?? product.thumbnail;
+  const productSnapshot = {
+    id: product.id,
+    title: product.title,
+    price: product.price,
+    thumbnail: product.thumbnail,
+    stock: product.stock,
+  };
 
   return (
     <section className="product-detail-page">
@@ -69,15 +77,9 @@ export default async function ProductDetailPage({ params }) {
           </strong>
 
           <div className="product-detail-actions">
-            <AddToCartButton
-              product={{
-                id: product.id,
-                title: product.title,
-                price: product.price,
-                thumbnail: product.thumbnail,
-                stock: product.stock,
-              }}
-            />
+            <AddToCartButton product={productSnapshot} />
+
+            <WishlistButton product={productSnapshot} />
           </div>
 
           <dl className="product-detail-facts">
