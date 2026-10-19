@@ -2,7 +2,11 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   useDispatch,
   useSelector,
@@ -77,8 +81,28 @@ export default function CheckoutPage() {
   const [isSubmitting, setIsSubmitting] =
     useState(false);
 
+  const submitLockRef = useRef(false);
+  const submitTimeoutRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (submitTimeoutRef.current !== null) {
+        window.clearTimeout(
+          submitTimeoutRef.current
+        );
+
+        submitTimeoutRef.current = null;
+      }
+
+      submitLockRef.current = false;
+    };
+  }, []);
+
   async function handleSubmit(event) {
     event.preventDefault();
+    if (submitLockRef.current) {
+      return;
+    }
 
     const formData = new FormData(event.currentTarget);
 
@@ -102,11 +126,18 @@ export default function CheckoutPage() {
       return;
     }
 
+    submitLockRef.current = true;
     setErrors({});
     setIsSubmitting(true);
 
     await new Promise((resolve) => {
-      setTimeout(resolve, 800);
+      submitTimeoutRef.current = window.setTimeout(
+        () => {
+          submitTimeoutRef.current = null;
+          resolve();
+        },
+        800
+      );
     });
 
     const order = {
@@ -122,6 +153,8 @@ export default function CheckoutPage() {
     const wasSaved = saveLastOrder(order);
 
     if (!wasSaved) {
+      submitLockRef.current = false;
+
       setErrors({
         form:
           "Browser tidak dapat menyimpan konfirmasi pesanan. Coba lagi.",
@@ -182,6 +215,15 @@ export default function CheckoutPage() {
           noValidate
         >
           <h2>Data pembeli</h2>
+          {Object.keys(errors).length > 0 &&
+          !errors.form && (
+            <p
+              className="form-error form-error-summary"
+              role="alert"
+            >
+              Periksa kembali data checkout yang belum valid.
+            </p>
+          )}
 
           {errors.form && (
             <p

@@ -169,7 +169,7 @@ export default function CartPage() {
               {usdFormatter.format(subtotal)}
             </strong>
           </div>
-          
+
           <Link href="/checkout" className="checkout-link">
             Lanjut ke checkout
           </Link>
