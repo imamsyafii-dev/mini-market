@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   items: [],
+  isHydrated: false,
 };
 
 const cartSlice = createSlice({
@@ -10,6 +11,7 @@ const cartSlice = createSlice({
   reducers: {
     hydrateCart(state, action) {
       state.items = action.payload;
+      state.isHydrated = true;
     },
 
     addItem(state, action) {
@@ -80,6 +82,9 @@ export const {
 
 export const selectCartItems = (state) =>
   state.cart.items;
+
+export const selectCartHydrated = (state) =>
+  state.cart.isHydrated;
 
 export const selectCartTotalQuantity = (state) =>
   state.cart.items.reduce(

@@ -12,6 +12,7 @@ import {
   decreaseQuantity,
   increaseQuantity,
   removeItem,
+  selectCartHydrated,
   selectCartItems,
   selectCartSubtotal,
   selectCartTotalQuantity,
@@ -24,12 +25,23 @@ const usdFormatter = new Intl.NumberFormat("en-US", {
 
 export default function CartPage() {
   const dispatch = useDispatch();
+  const isHydrated = useSelector(selectCartHydrated);
   const items = useSelector(selectCartItems);
   const subtotal = useSelector(selectCartSubtotal);
   const totalQuantity = useSelector(
     selectCartTotalQuantity
   );
 
+  if (!isHydrated) {
+    return (
+      <section
+        className="cart-loading"
+        aria-live="polite"
+      >
+        <p>Memuat keranjang...</p>
+      </section>
+    );
+  }
   if (items.length === 0) {
     return (
       <section className="cart-page">
@@ -157,6 +169,10 @@ export default function CartPage() {
               {usdFormatter.format(subtotal)}
             </strong>
           </div>
+          
+          <Link href="/checkout" className="checkout-link">
+            Lanjut ke checkout
+          </Link>
 
           <Link href="/" className="secondary-link">
             Lanjut belanja
