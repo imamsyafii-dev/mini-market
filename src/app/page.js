@@ -1,4 +1,9 @@
-export default function HomePage() {
+import ProductList from "@/components/product/ProductList";
+import { getProducts } from "@/lib/api/products";
+
+export default async function HomePage() {
+  const products = await getProducts(12);
+
   return (
     <section>
       <div className="hero">
@@ -20,13 +25,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="empty-state">
-          <h3>Produk akan segera ditampilkan</h3>
-          <p>
-            Pada tahap berikutnya, data produk akan diambil dari
-            DummyJSON API.
-          </p>
-        </div>
+        <ProductList products={products} />
       </section>
     </section>
   );
