@@ -134,6 +134,7 @@ export default function CartPage() {
                   onClick={() =>
                     dispatch(removeItem(item.id))
                   }
+                  aria-label={`Hapus ${item.title} dari keranjang`}
                 >
                   Hapus
                 </button>
