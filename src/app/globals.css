@@ -1090,3 +1090,144 @@ textarea {
     text-align: left;
   }
 }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.page-loading {
+  display: grid;
+  gap: 28px;
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #e4e4e7 25%,
+    #f4f4f5 50%,
+    #e4e4e7 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.4s ease-in-out infinite;
+}
+
+.loading-hero {
+  min-height: 260px;
+  border-radius: 24px;
+}
+
+.loading-heading {
+  width: 240px;
+  height: 38px;
+  border-radius: 8px;
+}
+
+.loading-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.loading-card {
+  min-height: 420px;
+  border-radius: 16px;
+}
+
+.error-state {
+  max-width: 680px;
+  margin: 64px auto;
+  padding: 48px;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+}
+
+.error-state .eyebrow {
+  color: #dc2626;
+}
+
+.error-state h1 {
+  margin: 12px 0;
+  font-size: 40px;
+}
+
+.error-state > p:not(.eyebrow) {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.error-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.retry-button {
+  min-height: 44px;
+  padding: 10px 18px;
+  color: #ffffff;
+  background: var(--primary);
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.retry-button:hover {
+  background: #1d4ed8;
+}
+
+@keyframes skeleton-loading {
+  from {
+    background-position: 200% 0;
+  }
+
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .loading-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .loading-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .loading-hero {
+    min-height: 220px;
+  }
+
+  .error-state {
+    padding: 24px;
+  }
+
+  .error-state h1 {
+    font-size: 32px;
+  }
+
+  .error-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

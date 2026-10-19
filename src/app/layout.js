@@ -5,7 +5,10 @@ import Header from "@/components/layout/Header";
 import StoreProvider from "@/store/StoreProvider";
 
 export const metadata = {
-  title: "MiniMarket",
+  title: {
+    default: "MiniMarket",
+    template: "%s | MiniMarket",
+  },
   description: "Mini marketplace dengan React, Next.js, dan Redux",
 };
 
